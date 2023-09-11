@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeController.swift
 //  TwitterSlideOutMenu
 //
 //  Created by Murat Ceyhun Korpeoglu on 3.09.2023.
@@ -7,17 +7,18 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class HomeController: UITableViewController {
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
-        view.backgroundColor = .red
+        view.backgroundColor = .gray
         setupNavigationItems()
     }
     
+
     fileprivate func setupNavigationItems() {
         
         navigationItem.title = "Home"
@@ -26,16 +27,13 @@ class ViewController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(handleOpen))
     }
     
-    
-    @objc fileprivate func handleHide() {
-        print("Hide button pressed.")
-    }
+    let menuController = MenuController()
+    fileprivate let menuWidth: CGFloat = 300
+  
     
     @objc fileprivate func handleOpen() {
         
-        let vc = MenuController()
-        
-        vc.view.frame = CGRect(x: 0, y: 0, width: 300, height: view.frame.height)
+        menuController.view.frame = CGRect(x: -menuWidth , y: 0, width: menuWidth, height: view.frame.height)
         
         let keyWindow = UIApplication.shared.connectedScenes
                 .filter({$0.activationState == .foregroundActive})
@@ -43,17 +41,32 @@ class ViewController: UITableViewController {
                 .first?.windows
                 .filter({$0.isKeyWindow}).first
         
-        
-        keyWindow?.addSubview(vc.view)
-                
-        
-//        view.addSubview(vc.view)
-        
-        
-        
-        
+        keyWindow?.addSubview(menuController.view)
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) {
+            
+            
+            self.menuController.view.transform = CGAffineTransform(translationX: self.menuWidth, y: 0)
+            
+            
+        }
+        addChild(menuController)
         print("Open button pressed.")
     }
+    
+    
+    
+    @objc fileprivate func handleHide() {
+        print("Hide button pressed.")
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) {
+            self.menuController.view.transform = .identity
+        }
+        
+//        menuController.view.removeFromSuperview()
+//        menuController.removeFromParent()
+    }
+    
+  
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
