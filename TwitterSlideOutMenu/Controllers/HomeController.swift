@@ -17,33 +17,90 @@ class HomeController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
         view.backgroundColor = .gray
         setupNavigationItems()
-        
+//        setupMenuController()
+
+
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         view.addGestureRecognizer(panGesture)
     }
-    
-    @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: view)
-        
-        if gesture.state == .changed {
-            
-            print(translation)
-            var x = translation.x
-            x = min(menuWidth, x)
-            x = max(0, x)
-    //        menuController.view.transform = CGAffineTransform(translationX: translation.x, y: 0)
-            navigationController?.view.transform = CGAffineTransform(translationX: x, y: 0)
-        } else if gesture.state == .ended {
-            handleOpen()
-        }
-    }
-    
+      
     
     let menuController = MenuController()
     fileprivate let menuWidth: CGFloat = 300
+    fileprivate var velocityOpenThresholl: CGFloat = 500
+    fileprivate var isMenuOpened = false
     
+    fileprivate func setupMenuController() {
+        
+        menuController.view.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: view.frame.height)
+        let keyWindow = UIApplication.shared.connectedScenes
+            .filter({$0.activationState == .foregroundActive})
+            .compactMap({$0 as? UIWindowScene})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first
+        keyWindow?.addSubview(menuController.view)
+        addChild(menuController)      
+    }
+    
+    @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
 
+        let translation = gesture.translation(in: view)
+
+        if gesture.state == .changed {
+
+            print(translation)
+            var x = translation.x
+            if isMenuOpened {
+                x = x + menuWidth
+            }
+            x = min(menuWidth, x)
+            x = max(0, x)
+            let transform = CGAffineTransform(translationX: x, y: 0)
+            menuController.view.transform = transform
+            navigationController?.view.transform = transform
+        } else if gesture.state == .ended {
+           handleEnded(gesture: gesture)
+        }
+    }
+    
+    fileprivate func handleEnded(gesture: UIPanGestureRecognizer) {
+        
+        let translation = gesture.translation(in: view)
+        let velocity = gesture.velocity(in: view)
+        print(translation.x)
+        print("velocity", velocity)
+        
+        if isMenuOpened {
+            
+            if abs(velocity.x) > velocityOpenThresholl {
+                handleHide()
+                return
+            }
+            
+            
+            if abs(translation.x) < menuWidth / 2 {
+                handleOpen()
+            } else {
+                handleHide()
+            }
+            
+        } else {
+            
+            if velocity.x > velocityOpenThresholl {
+                handleOpen()
+                return
+            }
+            
+            if translation.x < menuWidth/2 {
+                handleHide()
+            } else {
+                handleOpen()
+            }
+        }
+    }
+    
+  
     fileprivate func setupNavigationItems() {
         
         navigationItem.title = "Home"
@@ -52,7 +109,9 @@ class HomeController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(handleOpen))
     }
     
+    
     fileprivate func performAnimations(transform: CGAffineTransform) {
+        
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut) {
             self.menuController.view.transform = transform
 //            self.view.transform = transform
@@ -62,8 +121,8 @@ class HomeController: UITableViewController {
     
     
     @objc fileprivate func handleOpen() {
-        menuController.view.frame = CGRect(x: -menuWidth , y: 0, width: menuWidth, height: view.frame.height)
-
+        
+        menuController.view.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: view.frame.height)
         let keyWindow = UIApplication.shared.connectedScenes
             .filter({$0.activationState == .foregroundActive})
             .compactMap({$0 as? UIWindowScene})
@@ -72,17 +131,18 @@ class HomeController: UITableViewController {
         keyWindow?.addSubview(menuController.view)
         addChild(menuController)
         performAnimations(transform: CGAffineTransform(translationX: self.menuWidth, y: 0))
+        isMenuOpened = true
     }
     
     
     
     @objc fileprivate func handleHide() {
+        
         performAnimations(transform: .identity)
+        isMenuOpened = false
     }
     
   
-    
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
@@ -97,7 +157,6 @@ class HomeController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
 
 }
 
