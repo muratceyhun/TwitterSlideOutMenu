@@ -11,19 +11,38 @@ class HomeController: UITableViewController {
 
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
-        view.backgroundColor = .gray
-        setupNavigationItems()
-//        setupMenuController()
-
-
         
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        view.addGestureRecognizer(panGesture)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
+        view.backgroundColor = .cyan
+        setupNavigationItems()
+        setupPanGesture()
     }
+    
+    override func viewDidLayoutSubviews() {
+        setupDarkCoverView()
+     
+    }
+    
+    
+    let darkCoverView = UIView()
+
+    fileprivate func setupDarkCoverView() {
+        darkCoverView.alpha = 0
+
+        let keyWindow = UIApplication.shared.connectedScenes
+            .filter({$0.activationState == .foregroundActive})
+            .compactMap({$0 as? UIWindowScene})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first
+ 
+        darkCoverView.backgroundColor = UIColor(white: 0, alpha: 0.8)
+        darkCoverView.isUserInteractionEnabled = false
+        keyWindow?.addSubview(darkCoverView)
+        darkCoverView.frame = keyWindow?.frame ?? .zero
+        
+    }
+
       
     
     let menuController = MenuController()
@@ -31,8 +50,14 @@ class HomeController: UITableViewController {
     fileprivate var velocityOpenThresholl: CGFloat = 500
     fileprivate var isMenuOpened = false
     
-    fileprivate func setupMenuController() {
+    fileprivate func setupPanGesture() {
+        //        setupMenuController()
         
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        view.addGestureRecognizer(panGesture)
+    }
+    
+    fileprivate func setupMenuController() {
         menuController.view.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: view.frame.height)
         let keyWindow = UIApplication.shared.connectedScenes
             .filter({$0.activationState == .foregroundActive})
@@ -59,6 +84,11 @@ class HomeController: UITableViewController {
             let transform = CGAffineTransform(translationX: x, y: 0)
             menuController.view.transform = transform
             navigationController?.view.transform = transform
+            darkCoverView.transform = transform
+            
+            darkCoverView.alpha = x / menuWidth
+            
+            
         } else if gesture.state == .ended {
            handleEnded(gesture: gesture)
         }
@@ -116,6 +146,7 @@ class HomeController: UITableViewController {
             self.menuController.view.transform = transform
 //            self.view.transform = transform
             self.navigationController?.view.transform = transform
+            self.darkCoverView.alpha = transform == .identity ? 0 : 1
         }
     }
     
