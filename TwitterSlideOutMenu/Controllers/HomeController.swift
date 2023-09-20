@@ -17,11 +17,12 @@ class HomeController: UITableViewController {
         view.backgroundColor = .cyan
         setupNavigationItems()
         setupPanGesture()
+//        setupMenuController()
     }
     
     override func viewDidLayoutSubviews() {
         setupDarkCoverView()
-     
+        setupMenuController()
     }
     
     
@@ -58,6 +59,7 @@ class HomeController: UITableViewController {
     }
     
     fileprivate func setupMenuController() {
+        
         menuController.view.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: view.frame.height)
         let keyWindow = UIApplication.shared.connectedScenes
             .filter({$0.activationState == .foregroundActive})
@@ -65,7 +67,7 @@ class HomeController: UITableViewController {
             .first?.windows
             .filter({$0.isKeyWindow}).first
         keyWindow?.addSubview(menuController.view)
-        addChild(menuController)      
+//        addChild(menuController)
     }
     
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
@@ -107,7 +109,6 @@ class HomeController: UITableViewController {
                 handleHide()
                 return
             }
-            
             
             if abs(translation.x) < menuWidth / 2 {
                 handleOpen()
@@ -153,14 +154,14 @@ class HomeController: UITableViewController {
     
     @objc fileprivate func handleOpen() {
         
-        menuController.view.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: view.frame.height)
-        let keyWindow = UIApplication.shared.connectedScenes
-            .filter({$0.activationState == .foregroundActive})
-            .compactMap({$0 as? UIWindowScene})
-            .first?.windows
-            .filter({$0.isKeyWindow}).first
-        keyWindow?.addSubview(menuController.view)
-        addChild(menuController)
+//        menuController.view.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: view.frame.height)
+//        let keyWindow = UIApplication.shared.connectedScenes
+//            .filter({$0.activationState == .foregroundActive})
+//            .compactMap({$0 as? UIWindowScene})
+//            .first?.windows
+//            .filter({$0.isKeyWindow}).first
+//        keyWindow?.addSubview(menuController.view)
+     
         performAnimations(transform: CGAffineTransform(translationX: self.menuWidth, y: 0))
         isMenuOpened = true
     }
