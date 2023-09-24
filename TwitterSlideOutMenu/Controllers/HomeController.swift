@@ -14,9 +14,9 @@ class HomeController: UITableViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
-        view.backgroundColor = .cyan
+        view.backgroundColor = .red
         setupNavigationItems()
-        setupPanGesture()
+//        setupPanGesture()
 //        setupMenuController()
     }
     
