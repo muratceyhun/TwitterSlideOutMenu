@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeController: UITableViewController {
+class HomeController: UITableViewController, UIGestureRecognizerDelegate {
 
     
     override func viewDidLoad() {
@@ -55,8 +55,23 @@ class HomeController: UITableViewController {
         //        setupMenuController()
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        panGesture.delegate = self
         view.addGestureRecognizer(panGesture)
     }
+    
+    
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//        return true
+//    }
+    
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+////      This is hard to apply bc you have to calculate manually new frames.
+//    }
+    
+    
+
+    
+    
     
     fileprivate func setupMenuController() {
         
