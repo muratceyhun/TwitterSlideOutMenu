@@ -9,24 +9,26 @@ import UIKit
 
 
 class MenuController: UITableViewController {
+        
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = .green
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
+        view.backgroundColor = .blue
         tableView.separatorStyle = .singleLine
-        
-//        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-//        self.view.addGestureRecognizer(panGesture)
+
     }
     
     
-//    @objc func handlePan(gesture: UIPanGestureRecognizer) {
-//        let translation = gesture.translation(in: view)
-//        let x = translation.x
-//        view.transform = CGAffineTransform(translationX: x, y: 0)
-//    }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let customHeaderView = CustomMenuHeaderView()
+        return customHeaderView
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 200
+    }
+
 
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
