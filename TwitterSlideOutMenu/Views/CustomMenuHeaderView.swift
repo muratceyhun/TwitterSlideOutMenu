@@ -9,26 +9,59 @@ import UIKit
 
 
 class CustomMenuHeaderView: UIView {
+    
+    let nameLabel = UILabel()
+    let usernameLabel = UILabel()
+    let statsLabel = UILabel()
+    let profileImageView = ProfileImageView()
+
+    
+   
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        
         backgroundColor = .white
-        
-        
-        
-        let nameLabel = UILabel()
+        setupComponentProp()
+        setupStackView()
+        setupStatsAttributedText()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    fileprivate func setupStatsAttributedText() {
+        let attributedText = NSMutableAttributedString(string: "303  ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: "Following  ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]))
+        attributedText.append(NSAttributedString(string: "2910  ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14)]))
+        attributedText.append(NSAttributedString(string: "Followers", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]))
+        statsLabel.attributedText = attributedText
+    }
+    
+    fileprivate func setupComponentProp() {
         nameLabel.text = "Brian Voong"
         nameLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        let usernameLabel = UILabel()
         usernameLabel.text = "@buildthatapp"
-        
-        let statsLabel = UILabel()
         statsLabel.text = "303 Following 2910 Followers"
-        
+        profileImageView.image = UIImage(named: "image1")
+        profileImageView.contentMode = .scaleAspectFit
+        profileImageView.layer.cornerRadius = 48 / 2
+        profileImageView.clipsToBounds = true
+    }
+    
+    fileprivate func setupStackView() {
         // This is a spacing hack with UIView
+        let rightSpacerView = UIView()
         let arrangedSubviews = [
-            UIView(), nameLabel, usernameLabel, UIView(), SpacerView(space: 30), statsLabel]
+            UIView(),
+            UIStackView(arrangedSubviews: [profileImageView, rightSpacerView]),
+            nameLabel,
+            usernameLabel,
+            SpacerView(space: 30),
+            statsLabel
+        ]
+        
         let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
         stackView.axis = .vertical
         stackView.spacing = 4
@@ -43,7 +76,5 @@ class CustomMenuHeaderView: UIView {
         stackView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    
 }
