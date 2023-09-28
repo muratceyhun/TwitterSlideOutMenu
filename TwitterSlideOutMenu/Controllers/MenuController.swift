@@ -7,15 +7,30 @@
 
 import UIKit
 
+struct MenuItems {
+    let icon: UIImage
+    let title: String
+}
+
 
 class MenuController: UITableViewController {
+    
+    let menuItems =
+    [
+    MenuItems(icon: UIImage(named: "profile")!, title: "Profile"),
+    MenuItems(icon: UIImage(named: "lists")!, title: "Lists"),
+    MenuItems(icon: UIImage(named: "bookmarks")!, title: "Bookmarks"),
+    MenuItems(icon: UIImage(named: "moments")!, title: "Moments")
+    ]
+    
         
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = .blue
+//        view.backgroundColor = .white
         tableView.separatorStyle = .singleLine
+        tableView.separatorStyle = .none
 
     }
     
@@ -32,17 +47,22 @@ class MenuController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 14
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "cellID")
+        let cell = MenuItemCell(style: .default, reuseIdentifier: "cellID")
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
-        cell.textLabel?.text = "ROW \(indexPath.row)"
+        let menuItem = menuItems[indexPath.row]
+        cell.iconImageView.image = menuItem.icon
+        cell.titleLabel.text = menuItem.title
+       
+
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
 }
