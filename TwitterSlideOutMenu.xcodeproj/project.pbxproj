@@ -17,6 +17,7 @@
 		43A0C93A2AC231EC00AC537E /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A0C9392AC231EC00AC537E /* SpacerView.swift */; };
 		43A0C93C2AC3811A00AC537E /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A0C93B2AC3811A00AC537E /* ProfileImageView.swift */; };
 		43A0C93E2AC5EEA600AC537E /* MenuItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A0C93D2AC5EEA600AC537E /* MenuItemCell.swift */; };
+		43A0C9402AC7645B00AC537E /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A0C93F2AC7645B00AC537E /* ListController.swift */; };
 		43AA81152AAF6885001629FA /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AA81142AAF6885001629FA /* MenuController.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		43A0C9392AC231EC00AC537E /* SpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerView.swift; sourceTree = "<group>"; };
 		43A0C93B2AC3811A00AC537E /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		43A0C93D2AC5EEA600AC537E /* MenuItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCell.swift; sourceTree = "<group>"; };
+		43A0C93F2AC7645B00AC537E /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		43AA81142AAF6885001629FA /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 				43A0C9332AC02E0000AC537E /* Base */,
 				43AA81142AAF6885001629FA /* MenuController.swift */,
 				439E30322AA4CD16004079F9 /* HomeController.swift */,
+				43A0C93F2AC7645B00AC537E /* ListController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43A0C93C2AC3811A00AC537E /* ProfileImageView.swift in Sources */,
+				43A0C9402AC7645B00AC537E /* ListController.swift in Sources */,
 				43A0C93A2AC231EC00AC537E /* SpacerView.swift in Sources */,
 				43AA81152AAF6885001629FA /* MenuController.swift in Sources */,
 				43A0C9382AC22AFC00AC537E /* CustomMenuHeaderView.swift in Sources */,

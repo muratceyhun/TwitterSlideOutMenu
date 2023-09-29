@@ -17,7 +17,7 @@ class MenuController: UITableViewController {
     
     let menuItems =
     [
-    MenuItems(icon: UIImage(named: "profile")!, title: "Profile"),
+    MenuItems(icon: UIImage(named: "profile")!, title: "Home"),
     MenuItems(icon: UIImage(named: "lists")!, title: "Lists"),
     MenuItems(icon: UIImage(named: "bookmarks")!, title: "Bookmarks"),
     MenuItems(icon: UIImage(named: "moments")!, title: "Moments")
@@ -64,13 +64,13 @@ class MenuController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print(indexPath.row)
         let keyWindow = UIApplication.shared.connectedScenes
                 .filter({$0.activationState == .foregroundActive})
                 .compactMap({$0 as? UIWindowScene})
                 .first?.windows
                 .filter({$0.isKeyWindow}).first
-//        let baseSlidingController = keyWindow?.rootViewController as? BaseSlidingController
+        let baseSlidingController = keyWindow?.rootViewController as? BaseSlidingController
+        baseSlidingController?.didSelectMenuItem(indexPath: indexPath)
         
         
     }
