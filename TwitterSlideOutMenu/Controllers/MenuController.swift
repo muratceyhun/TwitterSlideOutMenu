@@ -33,6 +33,7 @@ class MenuController: UITableViewController {
         tableView.separatorStyle = .none
 
     }
+
     
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -63,6 +64,15 @@ class MenuController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        print(indexPath.row)
+        let keyWindow = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .compactMap({$0 as? UIWindowScene})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first
+//        let baseSlidingController = keyWindow?.rootViewController as? BaseSlidingController
+        
+        
     }
     
 }
