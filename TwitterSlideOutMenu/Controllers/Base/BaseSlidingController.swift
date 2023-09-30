@@ -11,24 +11,29 @@ import UIKit
 class BaseSlidingController: UIViewController {
     
     
-    let redView: UIView = {
-        let v = UIView()
+    class RightContainerView: UIView {}
+    class MenuContainerView: UIView {}
+    class DarkContainerView: UIView{}
+    
+    
+    let redView: RightContainerView = {
+        let v = RightContainerView()
         v.backgroundColor = .red
         v.translatesAutoresizingMaskIntoConstraints = false
         return v
     }()
     
     
-    let blueView: UIView = {
-       let v = UIView()
+    let blueView: MenuContainerView = {
+       let v = MenuContainerView()
         v.backgroundColor = .blue
         v.translatesAutoresizingMaskIntoConstraints = false
         return v
     }()
     
     
-    let darkCoverView: UIView = {
-       let v = UIView()
+    let darkCoverView: DarkContainerView = {
+       let v = DarkContainerView()
         v.backgroundColor = UIColor(white: 0, alpha: 0.7)
         v.alpha = 0
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -72,14 +77,14 @@ class BaseSlidingController: UIViewController {
         
         if isMenuOpened {
             if abs(velocity.x) > velocityThreshold {
-                closemenu()
+                closeMenu()
                 return
             }
             
             if abs(translation.x) < menuWidth/2 {
                 openMenu()
             } else {
-                closemenu()
+                closeMenu()
             }
         } else {
             if abs(velocity.x) > velocityThreshold {
@@ -88,7 +93,7 @@ class BaseSlidingController: UIViewController {
             }
             
             if translation.x < menuWidth / 2 {
-                closemenu()
+                closeMenu()
             } else {
                 openMenu()
             }
@@ -103,7 +108,7 @@ class BaseSlidingController: UIViewController {
         
     }
     
-    func closemenu() {
+    func closeMenu() {
         isMenuOpened = false
         redViewLeadingConstraint.constant = 0
         performAnimations()
@@ -111,7 +116,10 @@ class BaseSlidingController: UIViewController {
     
     
     func didSelectMenuItem(indexPath: IndexPath) {
-//        print("Selected Menu Item: \(indexPath.row)")
+        
+        
+        performRightViewCleanUp()
+        
         switch indexPath.row {
         case 0:
             print("Show Home Screen")
@@ -119,20 +127,29 @@ class BaseSlidingController: UIViewController {
             print("Show List Screen")
             let listController = ListController()
             redView.addSubview(listController.view)
+            addChild(listController)
+            rightViewController = listController
         case 2:
-            let bookmarksController = UIViewController()
-            bookmarksController.view.backgroundColor = .green
+            let bookmarksController = BookmarksController()
             redView.addSubview(bookmarksController.view)
-            print("Show Bookmarks Screen")
+            addChild(bookmarksController)
+            rightViewController = bookmarksController
+
         default:
             print("Show Moments Screen")
         }
         
         redView.bringSubviewToFront(darkCoverView)
-        closemenu()
+        closeMenu()
+     
+    }
+    
+    var rightViewController: UIViewController?
+    
+    fileprivate func performRightViewCleanUp() {
         
-         
-        
+        rightViewController?.view.removeFromSuperview()
+        rightViewController?.removeFromParent()
     }
     
     fileprivate func performAnimations() {
@@ -169,10 +186,11 @@ class BaseSlidingController: UIViewController {
     
     fileprivate func setupViewControllers() {
         
-        let homeController = HomeController()
+//        let homeController = HomeController()
+        rightViewController = HomeController()
         let menuController = MenuController()
 
-        let homeView = homeController.view!
+        let homeView = rightViewController!.view!
         let menuView = menuController.view!
         
         
@@ -201,7 +219,7 @@ class BaseSlidingController: UIViewController {
             darkCoverView.trailingAnchor.constraint(equalTo: redView.trailingAnchor),
             ])
         
-        addChild(homeController)
+        addChild(rightViewController!)
         addChild(menuController)
         
         
