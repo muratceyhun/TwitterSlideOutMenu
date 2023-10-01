@@ -180,10 +180,7 @@ class BaseSlidingController: UIViewController {
         
         NSLayoutConstraint.activate([
             redView.topAnchor.constraint(equalTo: view.topAnchor),
-//            redView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             redView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            
             
             blueView.topAnchor.constraint(equalTo: view.topAnchor),
             blueView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
