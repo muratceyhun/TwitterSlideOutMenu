@@ -20,5 +20,7 @@ class ListController: UIViewController {
         view.addSubview(label)
         label.frame = view.frame
         label.textAlignment = .center
+        navigationItem.title = "List"
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
