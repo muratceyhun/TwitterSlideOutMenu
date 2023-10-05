@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		430804932ACEED3700F6B59B /* ChatroomsMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430804922ACEED3700F6B59B /* ChatroomsMenuController.swift */; };
 		439E302F2AA4CD16004079F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E302E2AA4CD16004079F9 /* AppDelegate.swift */; };
 		439E30312AA4CD16004079F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E30302AA4CD16004079F9 /* SceneDelegate.swift */; };
 		439E30332AA4CD16004079F9 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E30322AA4CD16004079F9 /* HomeController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		430804922ACEED3700F6B59B /* ChatroomsMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatroomsMenuController.swift; sourceTree = "<group>"; };
 		439E302B2AA4CD16004079F9 /* TwitterSlideOutMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterSlideOutMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		439E302E2AA4CD16004079F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		439E30302AA4CD16004079F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				439E30322AA4CD16004079F9 /* HomeController.swift */,
 				43A0C93F2AC7645B00AC537E /* ListController.swift */,
 				43A0C9412AC8663300AC537E /* BookmarksController.swift */,
+				430804922ACEED3700F6B59B /* ChatroomsMenuController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				43A0C9402AC7645B00AC537E /* ListController.swift in Sources */,
 				43A0C93A2AC231EC00AC537E /* SpacerView.swift in Sources */,
 				43AA81152AAF6885001629FA /* MenuController.swift in Sources */,
+				430804932ACEED3700F6B59B /* ChatroomsMenuController.swift in Sources */,
 				43A0C9382AC22AFC00AC537E /* CustomMenuHeaderView.swift in Sources */,
 				439E30332AA4CD16004079F9 /* HomeController.swift in Sources */,
 				439E302F2AA4CD16004079F9 /* AppDelegate.swift in Sources */,
