@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		430804932ACEED3700F6B59B /* ChatroomsMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430804922ACEED3700F6B59B /* ChatroomsMenuController.swift */; };
+		430804952ACF24B600F6B59B /* ChatroomMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430804942ACF24B600F6B59B /* ChatroomMenuCell.swift */; };
+		430804972ACF313500F6B59B /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430804962ACF313500F6B59B /* Extensions+UIView.swift */; };
 		439E302F2AA4CD16004079F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E302E2AA4CD16004079F9 /* AppDelegate.swift */; };
 		439E30312AA4CD16004079F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E30302AA4CD16004079F9 /* SceneDelegate.swift */; };
 		439E30332AA4CD16004079F9 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439E30322AA4CD16004079F9 /* HomeController.swift */; };
@@ -25,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		430804922ACEED3700F6B59B /* ChatroomsMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatroomsMenuController.swift; sourceTree = "<group>"; };
+		430804942ACF24B600F6B59B /* ChatroomMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatroomMenuCell.swift; sourceTree = "<group>"; };
+		430804962ACF313500F6B59B /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
 		439E302B2AA4CD16004079F9 /* TwitterSlideOutMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterSlideOutMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		439E302E2AA4CD16004079F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		439E30302AA4CD16004079F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +102,8 @@
 				43A0C9392AC231EC00AC537E /* SpacerView.swift */,
 				43A0C93B2AC3811A00AC537E /* ProfileImageView.swift */,
 				43A0C93D2AC5EEA600AC537E /* MenuItemCell.swift */,
+				430804942ACF24B600F6B59B /* ChatroomMenuCell.swift */,
+				430804962ACF313500F6B59B /* Extensions+UIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -185,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				430804972ACF313500F6B59B /* Extensions+UIView.swift in Sources */,
 				43A0C9422AC8663300AC537E /* BookmarksController.swift in Sources */,
 				43A0C93C2AC3811A00AC537E /* ProfileImageView.swift in Sources */,
 				43A0C9402AC7645B00AC537E /* ListController.swift in Sources */,
@@ -195,6 +202,7 @@
 				439E30332AA4CD16004079F9 /* HomeController.swift in Sources */,
 				439E302F2AA4CD16004079F9 /* AppDelegate.swift in Sources */,
 				43A0C93E2AC5EEA600AC537E /* MenuItemCell.swift in Sources */,
+				430804952ACF24B600F6B59B /* ChatroomMenuCell.swift in Sources */,
 				439E30312AA4CD16004079F9 /* SceneDelegate.swift in Sources */,
 				43A0C9352AC02E1000AC537E /* BaseSlidingController.swift in Sources */,
 			);
