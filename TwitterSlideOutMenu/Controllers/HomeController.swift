@@ -23,9 +23,37 @@ class HomeController: UITableViewController, UIGestureRecognizerDelegate {
     fileprivate func setupNavigationItems() {
         
         navigationItem.title = "Home"
+        setupCircularNavButton()
 //        tableView.separatorStyle = .none
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Hide", style: .plain, target: self, action: #selector(handleHide))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(handleOpen))
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(handleOpen))
+    }
+    
+    fileprivate func setupCircularNavButton() {
+        
+        let customView = UIButton(type: .system)
+        customView.addTarget(self, action: #selector(handleOpen), for: .touchUpInside)
+        
+        customView.imageView?.image = UIImage(named: "cat") // This is not what you want....
+        customView.setImage(UIImage(named: "cat")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        customView.contentMode = .scaleAspectFit
+        customView.layer.cornerRadius = 20
+        customView.clipsToBounds = true
+        
+        //This doesn't work as well...
+//        customView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        
+        customView.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        customView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        let barButtonItem = UIBarButtonItem(customView: customView)
+        navigationItem.leftBarButtonItem = barButtonItem
+        
+        
+        
+        
+        // option #1 that doen't work...
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "mck")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleOpen))
     }
     
     

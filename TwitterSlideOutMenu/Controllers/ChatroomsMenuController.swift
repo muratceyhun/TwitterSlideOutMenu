@@ -10,7 +10,7 @@ import UIKit
 extension ChatroomsMenuController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        var results = [[String]]()
+//        var results = [[String]]()
         
         
         if searchText.isEmpty {
@@ -112,4 +112,5 @@ class ChatroomsMenuController: UITableViewController {
         cell.textLabel?.attributedText = attributedText
         return cell
     }
+    
 }
